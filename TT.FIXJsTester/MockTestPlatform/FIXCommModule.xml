@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Name>FIXCommModule</Name>
+
+  <InitiatorCfg>.\FIX Sessions\initiator.cfg</InitiatorCfg>
+
+  <TestingModules>
+
+    <Module>
+      <Assembly>xx</Assembly>
+      <Config>yyy</Config>
+    </Module>
+
+
+  </TestingModules>
+
+</Configuration>

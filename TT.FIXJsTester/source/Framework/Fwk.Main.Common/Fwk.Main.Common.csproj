@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4A57ED3B-774D-4344-B091-3328838F57F5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Fwk.Main.Common</RootNamespace>
+    <AssemblyName>Fwk.Main.Common</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MDFShared">
+      <HintPath>..\..\..\packages\MDFShared.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="ToolsShared">
+      <HintPath>..\..\..\packages\ToolsShared.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Abstract\BaseCommunicationModule.cs" />
+    <Compile Include="Abstract\BaseConfiguration.cs" />
+    <Compile Include="Configuration\Configuration.cs" />
+    <Compile Include="Converter\ConverterBase.cs" />
+    <Compile Include="Enums\Actions.cs" />
+    <Compile Include="Apps\MainAppBase.cs" />
+    <Compile Include="DTO\CMState.cs" />
+    <Compile Include="Enums\BusinessRejectReason.cs" />
+    <Compile Include="Enums\Currency.cs" />
+    <Compile Include="Enums\CxlRejReason.cs" />
+    <Compile Include="Enums\CxlRejResponseTo .cs" />
+    <Compile Include="Enums\DividendSplitType.cs" />
+    <Compile Include="Enums\ExecType.cs" />
+    <Compile Include="Enums\Fields\AccountListFields.cs" />
+    <Compile Include="Enums\Fields\BrokerListFields.cs" />
+    <Compile Include="Enums\Fields\BusinessMessageRejectField.cs" />
+    <Compile Include="Enums\Fields\CryptoCurrencyFields.cs" />
+    <Compile Include="Enums\Fields\DivSplitField.cs" />
+    <Compile Include="Enums\Fields\DivSplitListField.cs" />
+    <Compile Include="Enums\Fields\DivSplitReqField.cs" />
+    <Compile Include="Enums\Fields\ErrorFields.cs" />
+    <Compile Include="Enums\Fields\ExecutionReportFields.cs" />
+    <Compile Include="Enums\Fields\ExecutionReportListFields.cs" />
+    <Compile Include="Enums\Fields\Fields.cs" />
+    <Compile Include="Enums\Fields\MarketDataFields.cs" />
+    <Compile Include="Enums\Fields\MarketDataRequestField.cs" />
+    <Compile Include="Enums\Fields\OfferFields.cs" />
+    <Compile Include="Enums\Fields\OrderBookFields.cs" />
+    <Compile Include="Enums\Fields\OrderCancelRejectField.cs" />
+    <Compile Include="Enums\Fields\OrderFields.cs" />
+    <Compile Include="Enums\Fields\PortfolioPositionFields.cs" />
+    <Compile Include="Enums\Fields\PortfolioPositionListFields.cs" />
+    <Compile Include="Enums\Fields\PortfolioPositionTradeListRequestFields.cs" />
+    <Compile Include="Enums\Fields\PositionFields.cs" />
+    <Compile Include="Enums\Fields\PositionListFields.cs" />
+    <Compile Include="Enums\Fields\ReSyncPositionsField.cs" />
+    <Compile Include="Enums\Fields\SecurityFields.cs" />
+    <Compile Include="Enums\Fields\SecurityListFields.cs" />
+    <Compile Include="Enums\Fields\SecurityListRequestField.cs" />
+    <Compile Include="Enums\Fields\TradeFields.cs" />
+    <Compile Include="Enums\Fields\TradeListFields.cs" />
+    <Compile Include="Enums\Halted.cs" />
+    <Compile Include="Enums\OrdRejReason.cs" />
+    <Compile Include="Enums\OrdStatus.cs" />
+    <Compile Include="Enums\OrdType.cs" />
+    <Compile Include="Enums\PositionRejectReason.cs" />
+    <Compile Include="Enums\PositionStatus.cs" />
+    <Compile Include="Enums\PriceType.cs" />
+    <Compile Include="Enums\QuantityType.cs" />
+    <Compile Include="Enums\SecurityListRequestType.cs" />
+    <Compile Include="Enums\SecurityRequestResult.cs" />
+    <Compile Include="Enums\SecurityType.cs" />
+    <Compile Include="Enums\SettlType.cs" />
+    <Compile Include="Enums\Side.cs" />
+    <Compile Include="Enums\SubscriptionRequestType.cs" />
+    <Compile Include="Enums\TickDirection.cs" />
+    <Compile Include="Enums\TimeInForce.cs" />
+    <Compile Include="Enums\UpdateAction.cs" />
+    <Compile Include="Interfaces\ICommunicationModule.cs" />
+    <Compile Include="Interfaces\IConfiguration.cs" />
+    <Compile Include="Interfaces\IFIXMessageCreator.cs" />
+    <Compile Include="Interfaces\ILogger.cs" />
+    <Compile Include="Interfaces\IWebsocketManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\ConfigLoader.cs" />
+    <Compile Include="Util\Constants.cs" />
+    <Compile Include="Util\FixHelperExtended.cs" />
+    <Compile Include="Wrappers\CancelAllPositionsWrapper.cs" />
+    <Compile Include="Wrappers\CancelOrderWrapper.cs" />
+    <Compile Include="Wrappers\CancelPositionWrapper.cs" />
+    <Compile Include="Wrappers\ErrorWrapper.cs" />
+    <Compile Include="Wrappers\ExecutionReportListRequestWrapper.cs" />
+    <Compile Include="Wrappers\ExecutionReportListWrapper.cs" />
+    <Compile Include="Wrappers\ExecutionReportWrapper.cs" />
+    <Compile Include="Wrappers\PortfolioPositionListRequestWrapper.cs" />
+    <Compile Include="Wrappers\PositionListRequestWrapper.cs" />
+    <Compile Include="Wrappers\GenRejectedExecutionReportWrapper.cs" />
+    <Compile Include="Wrappers\PortfolioPositionTradeListRequestWrapper.cs" />
+    <Compile Include="Wrappers\Wrapper.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
