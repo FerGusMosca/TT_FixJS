@@ -18,6 +18,6 @@ namespace Fwk.Main.Common.Util
 
         public const string InvalidField = "Field not valid {0}: {1}";
 
-        public enum MessageType { Information, Debug, Error, Exception, EndLog };
+        public enum MessageType { Information, Debug, Error, Exception, AssertOk,AssertFailed, EndLog };
     }
 }

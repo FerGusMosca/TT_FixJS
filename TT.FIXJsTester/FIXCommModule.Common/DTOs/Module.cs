@@ -8,6 +8,8 @@ namespace FIXCommModule.Common.DTOs
 {
     public class Module
     {
+        public string Name { get; set; }
+
         public string Assembly { get; set; }
 
         public string Config { get; set; }

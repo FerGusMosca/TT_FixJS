@@ -35,7 +35,7 @@ namespace Fwk.Main.BusinessEntities.Securities
 
         public string SecurityDesc { get; set; }
 
-        public SecurityType SecType { get; set; }
+        public SecurityType? SecType { get; set; }
 
         public string Currency { get; set; }
 

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{21C8024F-BF63-4697-90D1-BAD841443B3E}</ProjectGuid>
+    <ProjectGuid>{8F73E587-BF15-415D-BE6D-E26EA31A1DD5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FIXCommModule.Common</RootNamespace>
-    <AssemblyName>FIXCommModule.Common</AssemblyName>
+    <RootNamespace>FIXGenericTesterModule.LogicLayer</RootNamespace>
+    <AssemblyName>FIXGenericTesterModule.LogicLayer</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,8 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="QuickFix, Version=1.8.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="QuickFix">
       <HintPath>..\packages\QuickFix.Net.1.8.0\lib\QuickFix.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -43,12 +42,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\Configuration.cs" />
-    <Compile Include="DTOs\Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Wrappers\Generic\RejectWrapper.cs" />
+    <Compile Include="Uitl\Builder\OrderBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FIXGenericTesterModule.Common\FIXGenericTesterModule.Common.csproj">
+      <Project>{faf78886-929c-429b-897b-06461ee1bded}</Project>
+      <Name>FIXGenericTesterModule.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\source\Framework\Fwk.Main.BusinessEntities\Fwk.Main.BusinessEntities.csproj">
       <Project>{97f7f85d-864c-44ed-8901-547f2f693427}</Project>
       <Name>Fwk.Main.BusinessEntities</Name>

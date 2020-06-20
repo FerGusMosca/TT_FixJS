@@ -31,7 +31,7 @@ namespace Fwk.Main.BusinessEntities.Orders
 
         public string Exchange { get; set; }
 
-        public OrdType OrdType { get; set; }
+        public OrdType? OrdType { get; set; }
 
         public QuantityType QuantityType { get; set; }
 

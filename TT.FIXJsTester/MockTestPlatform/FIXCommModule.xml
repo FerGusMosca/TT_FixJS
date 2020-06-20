@@ -7,8 +7,9 @@
   <TestingModules>
 
     <Module>
-      <Assembly>xx</Assembly>
-      <Config>yyy</Config>
+      <Name>FIXGenericTesterModule</Name>
+      <Assembly>FIXGenericTesterModule.FIXGenericTesterModule,FIXGenericTesterModule</Assembly>
+      <Config>FIXGenericTesterModule.xml</Config>
     </Module>
 
 

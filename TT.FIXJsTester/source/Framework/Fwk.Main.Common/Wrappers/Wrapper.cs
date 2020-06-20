@@ -10,9 +10,23 @@ namespace Fwk.Main.Common.Wrappers
 {
     public abstract class Wrapper
     {
+        #region Protected Attributes
+
+        public string Sender { get; set; }
+
+
+        #endregion
+
+
         #region Public Abstract Methods
 
-        public abstract object GetField(Fields field);
+        public virtual object GetField(Fields field)
+        {
+            if (field == Fields.SENDER)
+                return Sender;
+            else
+                return Fields.NULL;
+        }
 
         public abstract Actions GetAction();
 

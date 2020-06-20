@@ -25,6 +25,7 @@ namespace Fwk.Main.Common.Enums
         SECURITY_LIST_REQUEST,
         ORDER_CANCEL_REJECT,
         BUSINESS_MESSAGE_REJECT,
+        REJECT,
         ORDER_LIST,
         POSITION_LIST_REQUEST,
         POSITION_LIST,

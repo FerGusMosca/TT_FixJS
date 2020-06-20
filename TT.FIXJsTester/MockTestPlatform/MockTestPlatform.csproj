@@ -59,6 +59,10 @@
       <Project>{28a0822e-a3fc-409b-a372-cb5f1b2a3413}</Project>
       <Name>FIXCommModule %28FIX Modules\FIXCommModule\FIXCommModule%29</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FIXGenericTesterModule\FIXGenericTesterModule.csproj">
+      <Project>{79823e2e-e3ed-422d-a934-55f8609bd0aa}</Project>
+      <Name>FIXGenericTesterModule</Name>
+    </ProjectReference>
     <ProjectReference Include="..\source\Framework\Fwk.Main.Common\Fwk.Main.Common.csproj">
       <Project>{4a57ed3b-774d-4344-b091-3328838f57f5}</Project>
       <Name>Fwk.Main.Common</Name>
@@ -70,6 +74,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Config.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="FIXGenericTesterModule.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="FIXCommModule.xml">

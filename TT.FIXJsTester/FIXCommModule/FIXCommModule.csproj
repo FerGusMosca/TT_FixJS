@@ -50,6 +50,14 @@
       <Project>{21c8024f-bf63-4697-90d1-bad841443b3e}</Project>
       <Name>FIXCommModule.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FIXCommModule.LogicLayer\FIXCommModule.LogicLayer.csproj">
+      <Project>{f2c8b6cc-ba92-43a4-b911-32cf3611b91d}</Project>
+      <Name>FIXCommModule.LogicLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FIXGenericTesterModule.LogicLayer\FIXGenericTesterModule.LogicLayer.csproj">
+      <Project>{8f73e587-bf15-415d-be6d-e26ea31a1dd5}</Project>
+      <Name>FIXGenericTesterModule.LogicLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Fwk.Main.LogicLayer\Fwk.Main.LogicLayer.csproj">
       <Project>{075cc3db-2f95-410a-a817-e182e4edef54}</Project>
       <Name>Fwk.Main.LogicLayer</Name>

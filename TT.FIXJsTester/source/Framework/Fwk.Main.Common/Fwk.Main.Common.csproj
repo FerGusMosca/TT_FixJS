@@ -34,6 +34,9 @@
     <Reference Include="MDFShared">
       <HintPath>..\..\..\packages\MDFShared.dll</HintPath>
     </Reference>
+    <Reference Include="QuickFix">
+      <HintPath>..\..\..\packages\QuickFix.Net.1.8.0\lib\QuickFix.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -81,6 +84,7 @@
     <Compile Include="Enums\Fields\PortfolioPositionTradeListRequestFields.cs" />
     <Compile Include="Enums\Fields\PositionFields.cs" />
     <Compile Include="Enums\Fields\PositionListFields.cs" />
+    <Compile Include="Enums\Fields\RejectFields.cs" />
     <Compile Include="Enums\Fields\ReSyncPositionsField.cs" />
     <Compile Include="Enums\Fields\SecurityFields.cs" />
     <Compile Include="Enums\Fields\SecurityListFields.cs" />
@@ -113,17 +117,18 @@
     <Compile Include="Util\ConfigLoader.cs" />
     <Compile Include="Util\Constants.cs" />
     <Compile Include="Util\FixHelperExtended.cs" />
-    <Compile Include="Wrappers\CancelAllPositionsWrapper.cs" />
-    <Compile Include="Wrappers\CancelOrderWrapper.cs" />
-    <Compile Include="Wrappers\CancelPositionWrapper.cs" />
+    <Compile Include="Wrappers\Generic\RejectWrapper.cs" />
+    <Compile Include="Wrappers\Order Routing\CancelAllPositionsWrapper.cs" />
+    <Compile Include="Wrappers\Order Routing\CancelOrderWrapper.cs" />
+    <Compile Include="Wrappers\Order Routing\CancelPositionWrapper.cs" />
     <Compile Include="Wrappers\ErrorWrapper.cs" />
-    <Compile Include="Wrappers\ExecutionReportListRequestWrapper.cs" />
-    <Compile Include="Wrappers\ExecutionReportListWrapper.cs" />
-    <Compile Include="Wrappers\ExecutionReportWrapper.cs" />
-    <Compile Include="Wrappers\PortfolioPositionListRequestWrapper.cs" />
-    <Compile Include="Wrappers\PositionListRequestWrapper.cs" />
-    <Compile Include="Wrappers\GenRejectedExecutionReportWrapper.cs" />
-    <Compile Include="Wrappers\PortfolioPositionTradeListRequestWrapper.cs" />
+    <Compile Include="Wrappers\Order Routing\ExecutionReportListRequestWrapper.cs" />
+    <Compile Include="Wrappers\Order Routing\ExecutionReportListWrapper.cs" />
+    <Compile Include="Wrappers\Order Routing\ExecutionReportWrapper.cs" />
+    <Compile Include="Wrappers\Account\PortfolioPositionListRequestWrapper.cs" />
+    <Compile Include="Wrappers\Account\PositionListRequestWrapper.cs" />
+    <Compile Include="Wrappers\Order Routing\GenRejectedExecutionReportWrapper.cs" />
+    <Compile Include="Wrappers\Account\PortfolioPositionTradeListRequestWrapper.cs" />
     <Compile Include="Wrappers\Wrapper.cs" />
   </ItemGroup>
   <ItemGroup />

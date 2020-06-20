@@ -26,7 +26,7 @@ namespace Fwk.Main.LogicLayer.Modules
 
         protected OnLogMessage OnLogMsg { get; set; }
 
-        protected OnMessageReceived OnMessageRcv { get; set; }
+        protected OnMessageReceived DoPublishMessage { get; set; }
 
         protected IConfiguration Config { get; set; }
 
