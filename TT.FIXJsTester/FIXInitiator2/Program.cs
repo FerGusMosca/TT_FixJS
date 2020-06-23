@@ -99,7 +99,7 @@ namespace FIXInitiator2
             Program myProgram = new Program();
 
             Initiator = new SocketInitiator(myProgram, FileStoreFactory, SessionSettings, ScreenLogFactory);
-
+            
             Initiator.Start();
 
 
@@ -137,6 +137,7 @@ namespace FIXInitiator2
             AppLogger.Debug(sessionID.ToString());
             Console.WriteLine(string.Format("@onLogon:{0}", sessionID.ToString()));
             SessionID = sessionID;
+            
             StartPublishingExecutionReports();
         }
 

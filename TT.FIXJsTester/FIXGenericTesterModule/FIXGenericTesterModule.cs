@@ -73,6 +73,46 @@ namespace FIXGenericTesterModule
            }
        }
 
+       protected void ProcessExecutionReport(object param)
+       {
+           try
+           {
+               lock (TimeoutOrders)
+               {
+                   Wrapper erWrapper = (Wrapper)param;
+
+                   string key = (string)erWrapper.GetField(ExecutionReportFields.KEY);
+                   
+
+                   if (TimeoutOrders.ContainsKey(key))
+                       TimeoutOrders.Remove(key);
+
+                   if (MessageOk.ContainsKey(key))
+                   {
+                       //We expected the message to be ok but it was ejected
+                       DoLog(string.Format("{0}-Test case OK for Order ClOrdId = {1}. We expected a valid ER and that was received.", Configuration.Name, key),Constants.MessageType.AssertOk);
+                   }
+
+                   if (MissingTags.ContainsKey(key))
+                   {
+                       DoLog(string.Format("{0}-Test case FAILED for ClOrdId ={1}. Expected a missing tag {2} but received an Ok Execution Report", Configuration.Name, key, MissingTags[key]), Constants.MessageType.AssertFailed);
+                   }
+
+                   if (ExtraTags.ContainsKey(key))
+                   {
+                       DoLog(string.Format("{0}-Test case FAILED for ClOrdId ={1}. Expected an extra tag {2} but received an Ok Execution Report", Configuration.Name, key, ExtraTags[key]), Constants.MessageType.AssertFailed);
+                   }
+               }
+
+           }
+           catch (Exception ex)
+           {
+               DoLog(string.Format("{0}-Critical error processing a reject:{1}", Configuration.Name, ex.Message), Constants.MessageType.Error);
+           }
+       
+       
+       }
+
         //Here we will process the rejected messages and see if that's ok or not
        protected void ProcessReject(object param)
        {
@@ -101,9 +141,9 @@ namespace FIXGenericTesterModule
                    {
                        string refTag = (string)rejectWrapper.GetField(RejectFields.RefTagID);
                        if (MissingTags[key] == refTag)
-                           DoLog(string.Format("{0}-Test case OK for ClOrdId ={1}. Extected to have a message rejected for  missing tag ={2} and it was rejected for that tag", Configuration.Name, key, refTag), Constants.MessageType.AssertOk);
+                           DoLog(string.Format("{0}-Test case OK for ClOrdId ={1}. Expected to have a message rejected for  missing tag ={2} and it was rejected for that tag", Configuration.Name, key, refTag), Constants.MessageType.AssertOk);
                        else
-                           DoLog(string.Format("{0}-Test case FAILED for ClOrdId ={1}. Extected to have a message rejected for  missing tag ={2} but it was rejected for tag {3}", Configuration.Name, key, MissingTags[key], refTag), Constants.MessageType.AssertFailed);
+                           DoLog(string.Format("{0}-Test case FAILED for ClOrdId ={1}. Expected to have a message rejected for  missing tag ={2} but it was rejected for tag {3}", Configuration.Name, key, MissingTags[key], refTag), Constants.MessageType.AssertFailed);
                    }
 
                    if (ExtraTags.ContainsKey(key))
@@ -162,6 +202,14 @@ namespace FIXGenericTesterModule
                     
                     Thread processNewOrderThread = new Thread(ProcessReject);
                     processNewOrderThread.Start(wrapper);
+                    return CMState.BuildSuccess();
+                }
+                else if (wrapper.GetAction() == Actions.EXECUTION_REPORT)
+                {
+                    DoLog("Processing EXECUTION_REPORT @:" + Configuration.Name, Fwk.Main.Common.Util.Constants.MessageType.Information);
+
+                    Thread processExecReportThread = new Thread(ProcessExecutionReport);
+                    processExecReportThread.Start(wrapper);
                     return CMState.BuildSuccess();
                 }
                 else

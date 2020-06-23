@@ -46,7 +46,9 @@
     <Compile Include="Configuration\Configuration.cs" />
     <Compile Include="DTOs\Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\FixHelper.cs" />
     <Compile Include="Wrappers\Generic\RejectWrapper.cs" />
+    <Compile Include="Wrappers\Order Routing\FIXExecutionReportWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\source\Framework\Fwk.Main.BusinessEntities\Fwk.Main.BusinessEntities.csproj">
@@ -58,6 +60,7 @@
       <Name>Fwk.Main.Common</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

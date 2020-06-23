@@ -1,6 +1,7 @@
 ﻿using FIXCommModule.Common.Configuration;
 using FIXCommModule.Common.DTOs;
 using FIXCommModule.Common.Wrappers.Generic;
+using FIXCommModule.Common.Wrappers.Order_Routing;
 using FIXCommModule.LogicLayer.Util.Builder;
 using FIXCommModule.LogicLayer.Util.Converter;
 using Fwk.Main.BusinessEntities.Orders;
@@ -124,6 +125,41 @@ namespace FIXCommModule
             {
 
                 DoLog(string.Format("Critical error processing a Reject message @{0}:{1}", Configuration.Name, ex.Message), Fwk.Main.Common.Util.Constants.MessageType.Error);
+            }
+        
+        }
+
+        protected void ProcesssExecutionReportMessage(object param)
+        { 
+           try
+            {
+                QuickFix.FIX44.ExecutionReport execReport = (QuickFix.FIX44.ExecutionReport)param;
+                string clOrdId = execReport.GetString(QuickFix.Fields.Tags.ClOrdID);
+
+                lock (tLock)
+                {
+
+                    if (SentOrders.ContainsKey(clOrdId))
+                    {
+                        string sender = SentOrders[clOrdId];
+
+                        if (TestingModules.ContainsKey(sender))
+                        {
+                            FIXExecutionReportWrapper wrapper = new FIXExecutionReportWrapper(clOrdId,execReport, Configuration);
+                            TestingModules[sender].ProcessMessage(wrapper);
+                        }
+                        else
+                            DoLog(string.Format("{0}-Unknown sender @{1} ", Configuration.Name, sender), Fwk.Main.Common.Util.Constants.MessageType.Error);
+                    
+                    }
+                    else
+                        DoLog(string.Format("{0}-Ignoring unknown ClOrdId execution report @{1} ", Configuration.Name, clOrdId), Fwk.Main.Common.Util.Constants.MessageType.Error);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                DoLog(string.Format("Critical error processing execution report @{0}:{1}", Configuration.Name, ex.Message), Fwk.Main.Common.Util.Constants.MessageType.Error);
             }
         
         }
@@ -263,6 +299,11 @@ namespace FIXCommModule
         public void FromApp(QuickFix.Message message, SessionID sessionID)
         {
             DoLog(string.Format("@fromApp:{0}", message.ToString()), Fwk.Main.Common.Util.Constants.MessageType.Information);
+            if (message is QuickFix.FIX44.ExecutionReport)
+            {
+                Thread processExecReport = new Thread(ProcesssExecutionReportMessage);
+                processExecReport.Start((QuickFix.FIX44.ExecutionReport)message);
+            }
         }
 
         public void OnCreate(SessionID sessionID)
