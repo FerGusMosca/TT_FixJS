@@ -43,6 +43,18 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BaseTestingModule.Common\BaseTestingModule.Common.csproj">
+      <Project>{a163f439-bc6c-4a88-b68e-4a74f80c80df}</Project>
+      <Name>BaseTestingModule.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BaseTestingModule.LogicLayer\BaseTestingModule.LogicLayer.csproj">
+      <Project>{914bb8ed-219a-4904-b298-612d098e4447}</Project>
+      <Name>BaseTestingModule.LogicLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BaseTestingModule\BaseTestingModule.csproj">
+      <Project>{9cec2aa3-492e-4a09-a043-d72bbc6d2bfc}</Project>
+      <Name>BaseTestingModule</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FIXGenericTesterModule.Common\FIXGenericTesterModule.Common.csproj">
       <Project>{faf78886-929c-429b-897b-06461ee1bded}</Project>
       <Name>FIXGenericTesterModule.Common</Name>

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FAF78886-929C-429B-897B-06461EE1BDED}</ProjectGuid>
+    <ProjectGuid>{A163F439-BC6C-4A88-B68E-4A74F80C80DF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FIXGenericTesterModule.Common</RootNamespace>
-    <AssemblyName>FIXGenericTesterModule.Common</AssemblyName>
+    <RootNamespace>BaseTestingModule.Common</RootNamespace>
+    <AssemblyName>BaseTestingModule.Common</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,8 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Wrappers\Order Routing\NewOrderWrapper.cs" />
+    <Compile Include="Wrappers\Order Routing\OrderWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\source\Framework\Fwk.Main.BusinessEntities\Fwk.Main.BusinessEntities.csproj">

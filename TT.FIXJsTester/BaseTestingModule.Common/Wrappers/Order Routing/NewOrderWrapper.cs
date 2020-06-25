@@ -1,20 +1,20 @@
 ﻿using Fwk.Main.BusinessEntities.Orders;
+using Fwk.Main.Common.Abstract;
 using Fwk.Main.Common.Enums;
 using Fwk.Main.Common.Interfaces;
-using Fwk.Main.Common.Wrappers.Order_Routing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FIXGenericTesterModule.Common.Wrappers.Order_Routing
+namespace BaseTestingModule.Common.Wrappers.Order_Routing
 {
     public class NewOrderWrapper : OrderWrapper
     {
         #region Constructors
 
-        public NewOrderWrapper(Order pOrder, FIXGenericTesterModule.Common.Configuration.Configuration pConfig)
+        public NewOrderWrapper(Order pOrder, BaseConfiguration pConfig)
         {
             Order = pOrder;
 

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FIXGenericTesterModule.Common.Uitl.Builder
+namespace BaseTestingModule.LogicLayer.Uitl.Builder
 {
     public class OrderBuilder
     {

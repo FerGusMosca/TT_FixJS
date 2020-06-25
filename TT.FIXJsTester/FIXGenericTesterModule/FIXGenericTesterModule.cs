@@ -1,6 +1,6 @@
-﻿using FIXGenericTesterModule.Common.Configuration;
-using FIXGenericTesterModule.Common.Uitl.Builder;
-using FIXGenericTesterModule.Common.Wrappers.Order_Routing;
+﻿using BaseTestingModule.Common.Wrappers.Order_Routing;
+using BaseTestingModule.LogicLayer.Uitl.Builder;
+using FIXGenericTesterModule.Common.Configuration;
 using Fwk.Main.BusinessEntities.Orders;
 using Fwk.Main.Common.DTO;
 using Fwk.Main.Common.Enums;
@@ -18,14 +18,12 @@ using System.Threading.Tasks;
 
 namespace FIXGenericTesterModule
 {
-    public class FIXGenericTesterModule : BaseModule
+    public class FIXGenericTesterModule :   BaseTestingModule.BaseTestingModule
     {
 
         #region Protected Attributes
 
        protected Configuration Configuration { get; set; }
-
-       protected Dictionary<string, DateTime> TimeoutOrders { get; set; }
 
        protected Dictionary<string, string> MissingTags { get; set; }
 
@@ -35,43 +33,7 @@ namespace FIXGenericTesterModule
 
         #endregion
 
-
         #region Protected Methods
-
-       protected void ProcessTimeouts()
-       {
-           try
-           {
-               while (true)
-               {
-                   lock (TimeoutOrders)
-                   {
-                       List<string> toRemove = new List<string>();
-                       foreach (string key in TimeoutOrders.Keys)
-                       {
-                           DateTime start = TimeoutOrders[key];
-
-                           TimeSpan elapsed = DateTime.Now - start;
-
-                           if (elapsed.TotalSeconds > 3)
-                           {
-                               DoLog(string.Format("{0}-TIMEOUT waiting for response for for Order ClOrdId = {1}. ", Configuration.Name,key),Constants.MessageType.AssertFailed);
-                               toRemove.Add(key);
-                           }
-
-                       }
-
-                       toRemove.ForEach(x => TimeoutOrders.Remove(x));
-                   }
-
-                   Thread.Sleep(5 * 1000);
-               }
-           }
-           catch (Exception ex)
-           {
-               DoLog(string.Format("{0}-Critical error processing timeouts}:{1}", Configuration.Name, ex.Message), Constants.MessageType.Error);
-           }
-       }
 
        protected void ProcessExecutionReport(object param)
        {
@@ -107,7 +69,7 @@ namespace FIXGenericTesterModule
            }
            catch (Exception ex)
            {
-               DoLog(string.Format("{0}-Critical error processing a reject:{1}", Configuration.Name, ex.Message), Constants.MessageType.Error);
+               DoLog(string.Format("{0}-Critical error processing a execution report:{1}", Configuration.Name, ex.Message), Constants.MessageType.Error);
            }
        
        
@@ -180,6 +142,17 @@ namespace FIXGenericTesterModule
                 MissingTags.Add(missingTagOrder.ClOrdId, "1");//ClOrdId
                 TimeoutOrders.Add(missingTagOrder.ClOrdId, DateTime.Now);
                 DoPublishMessage(missingTagOrderWrapper);
+
+                //3- Invalid Value tag test
+                DoLog(string.Format("Sending invalid tag value @{0}", Configuration.Name), Constants.MessageType.Information);
+                Order invalidValueOrder = OrderBuilder.BuildFullOrder();
+                invalidValueOrder.Side = Side.BuyToClose;
+                NewOrderWrapper invalidValueOrderWrapper = new NewOrderWrapper(invalidValueOrder, Configuration);
+                MissingTags.Add(invalidValueOrder.ClOrdId, "54");//Side
+                TimeoutOrders.Add(invalidValueOrder.ClOrdId, DateTime.Now);
+                DoPublishMessage(invalidValueOrderWrapper);
+
+                
             }
             catch (Exception ex)
             {
@@ -241,7 +214,7 @@ namespace FIXGenericTesterModule
                     runTestsThread.Start();
 
                     Thread processTimeouts = new Thread(ProcessTimeouts);
-                    processTimeouts.Start();
+                    processTimeouts.Start(Configuration.Name);
 
                     return true;
                 }

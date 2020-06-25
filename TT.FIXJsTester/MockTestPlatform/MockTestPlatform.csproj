@@ -59,6 +59,10 @@
       <Project>{28a0822e-a3fc-409b-a372-cb5f1b2a3413}</Project>
       <Name>FIXCommModule %28FIX Modules\FIXCommModule\FIXCommModule%29</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FIXCounterTesterModule\FIXCounterTesterModule.csproj">
+      <Project>{9b203857-02a3-4f68-952c-a4b62b8f8638}</Project>
+      <Name>FIXCounterTesterModule</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FIXGenericTesterModule\FIXGenericTesterModule.csproj">
       <Project>{79823e2e-e3ed-422d-a934-55f8609bd0aa}</Project>
       <Name>FIXGenericTesterModule</Name>
@@ -76,11 +80,15 @@
     <Content Include="Config.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="FIXCounterTesterModule.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="FIXGenericTesterModule.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="FIXCommModule.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
