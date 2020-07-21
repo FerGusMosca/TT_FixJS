@@ -21,28 +21,31 @@ namespace MockTestPlatform
 
         public static void DoLog(string msg, Constants.MessageType type)
         {
-            if (type == Fwk.Main.Common.Util.Constants.MessageType.Error ||
-                type == Fwk.Main.Common.Util.Constants.MessageType.Exception)
-                Console.ForegroundColor = ConsoleColor.Red;
-
-            if (type == Fwk.Main.Common.Util.Constants.MessageType.Debug)
-                Console.ForegroundColor = ConsoleColor.Yellow;
-
-            if (type == Fwk.Main.Common.Util.Constants.MessageType.AssertFailed)
-                Console.ForegroundColor = ConsoleColor.DarkRed;
-
-            if (type == Fwk.Main.Common.Util.Constants.MessageType.AssertOk)
-                Console.ForegroundColor = ConsoleColor.Green;
-
-            if (ToConsole)
-                Console.WriteLine(msg);
-            else if (msg.StartsWith("toConsole->"))
+            lock (App)
             {
-                Console.WriteLine(msg.Replace("toConsole->", ""));
-                Console.WriteLine("");
-            }
+                if (type == Fwk.Main.Common.Util.Constants.MessageType.Error ||
+                    type == Fwk.Main.Common.Util.Constants.MessageType.Exception)
+                    Console.ForegroundColor = ConsoleColor.Red;
 
-            Console.ResetColor();
+                if (type == Fwk.Main.Common.Util.Constants.MessageType.Debug)
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+
+                if (type == Fwk.Main.Common.Util.Constants.MessageType.AssertFailed)
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+
+                if (type == Fwk.Main.Common.Util.Constants.MessageType.AssertOk)
+                    Console.ForegroundColor = ConsoleColor.Green;
+
+                if (ToConsole)
+                    Console.WriteLine(msg);
+                else if (msg.StartsWith("toConsole->"))
+                {
+                    Console.WriteLine(msg.Replace("toConsole->", ""));
+                    Console.WriteLine("");
+                }
+
+                Console.ResetColor();
+            }
         }
 
         static void Main(string[] args)

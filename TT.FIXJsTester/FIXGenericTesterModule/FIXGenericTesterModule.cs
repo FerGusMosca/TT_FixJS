@@ -52,17 +52,17 @@ namespace FIXGenericTesterModule
                    if (MessageOk.ContainsKey(key))
                    {
                        //We expected the message to be ok but it was ejected
-                       DoLog(string.Format("{0}-Test case OK for Order ClOrdId = {1}. We expected a valid ER and that was received.", Configuration.Name, key),Constants.MessageType.AssertOk);
+                       DoLog(string.Format("<{0}>-Test case OK for Order ClOrdId = {1}. We expected a valid ER and that was received.", Configuration.Name, key),Constants.MessageType.AssertOk);
                    }
 
                    if (MissingTags.ContainsKey(key))
                    {
-                       DoLog(string.Format("{0}-Test case FAILED for ClOrdId ={1}. Expected a missing tag {2} but received an Ok Execution Report", Configuration.Name, key, MissingTags[key]), Constants.MessageType.AssertFailed);
+                       DoLog(string.Format("<{0}>-Test case FAILED for ClOrdId ={1}. Expected a missing tag {2} but received an Ok Execution Report", Configuration.Name, key, MissingTags[key]), Constants.MessageType.AssertFailed);
                    }
 
                    if (ExtraTags.ContainsKey(key))
                    {
-                       DoLog(string.Format("{0}-Test case FAILED for ClOrdId ={1}. Expected an extra tag {2} but received an Ok Execution Report", Configuration.Name, key, ExtraTags[key]), Constants.MessageType.AssertFailed);
+                       DoLog(string.Format("<{0}>-Test case FAILED for ClOrdId ={1}. Expected an extra tag {2} but received an Ok Execution Report", Configuration.Name, key, ExtraTags[key]), Constants.MessageType.AssertFailed);
                    }
                }
 
@@ -95,7 +95,7 @@ namespace FIXGenericTesterModule
                    {
                        string refTag = (string)rejectWrapper.GetField(RejectFields.RefTagID);
                        //We expected the message to be ok but it was ejected
-                       DoLog(string.Format("{0}-Test case FAILED for Order ClOrdId = {1}. We expected the order to be ok but it was rejected. Reason={2} Tag={3}", Configuration.Name, key, text, refTag != null ? refTag : "??"),
+                       DoLog(string.Format("<{0}>-Test case FAILED for Order ClOrdId = {1}. We expected the order to be ok but it was rejected. Reason={2} Tag={3}", Configuration.Name, key, text, refTag != null ? refTag : "??"),
                              Constants.MessageType.AssertFailed);
                    }
 
@@ -103,9 +103,9 @@ namespace FIXGenericTesterModule
                    {
                        string refTag = (string)rejectWrapper.GetField(RejectFields.RefTagID);
                        if (MissingTags[key] == refTag)
-                           DoLog(string.Format("{0}-Test case OK for ClOrdId ={1}. Expected to have a message rejected for  missing tag ={2} and it was rejected for that tag", Configuration.Name, key, refTag), Constants.MessageType.AssertOk);
+                           DoLog(string.Format("<{0}>-Test case OK for ClOrdId ={1}. Expected to have a message rejected for  missing tag ={2} and it was rejected for that tag", Configuration.Name, key, refTag), Constants.MessageType.AssertOk);
                        else
-                           DoLog(string.Format("{0}-Test case FAILED for ClOrdId ={1}. Expected to have a message rejected for  missing tag ={2} but it was rejected for tag {3}", Configuration.Name, key, MissingTags[key], refTag), Constants.MessageType.AssertFailed);
+                           DoLog(string.Format("<{0}>-Test case FAILED for ClOrdId ={1}. Expected to have a message rejected for  missing tag ={2} but it was rejected for tag {3}", Configuration.Name, key, MissingTags[key], refTag), Constants.MessageType.AssertFailed);
                    }
 
                    if (ExtraTags.ContainsKey(key))

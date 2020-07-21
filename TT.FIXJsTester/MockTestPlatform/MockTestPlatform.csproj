@@ -67,6 +67,10 @@
       <Project>{79823e2e-e3ed-422d-a934-55f8609bd0aa}</Project>
       <Name>FIXGenericTesterModule</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FIXRecoveryTesterModule\FIXRecoveryTesterModule.csproj">
+      <Project>{aa2b4f0a-e492-48e9-9e1c-8d8b2e14da40}</Project>
+      <Name>FIXRecoveryTesterModule</Name>
+    </ProjectReference>
     <ProjectReference Include="..\source\Framework\Fwk.Main.Common\Fwk.Main.Common.csproj">
       <Project>{4a57ed3b-774d-4344-b091-3328838f57f5}</Project>
       <Name>Fwk.Main.Common</Name>
@@ -78,6 +82,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Config.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="FIXRecoveryTesterModule.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="FIXCounterTesterModule.xml">

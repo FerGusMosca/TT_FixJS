@@ -26,6 +26,8 @@ namespace FIXCounterTesterModule
 
         protected Dictionary<string, Order> OrdersSent { get; set; }
 
+        protected int? LastProcessedCounter { get; set; } 
+
         #endregion
 
         #region Protected Methods
@@ -41,23 +43,67 @@ namespace FIXCounterTesterModule
                     string key = (string)erWrapper.GetField(ExecutionReportFields.KEY);
 
                     string orderId = (string)erWrapper.GetField(ExecutionReportFields.OrderID);
+                    string clOrderId = (string)erWrapper.GetField(ExecutionReportFields.ClOrdID);
 
 
                     if (TimeoutOrders.ContainsKey(key))
                         TimeoutOrders.Remove(key);
 
-                    DoLog(string.Format("{0}- Received order id {1}", Configuration.Name, orderId), Constants.MessageType.AssertOk);
+                    if (OrdersSent.ContainsKey(key))
+                    {
 
-                    //TODO: impl. validation
+                        if (orderId.Contains("_"))
+                        {
+                            DoLog(string.Format("<{0}>- Received order id {1}", Configuration.Name, orderId), Constants.MessageType.AssertOk);
+
+                            string strCount = orderId.Split(new string[] { "_" }, StringSplitOptions.RemoveEmptyEntries)[1];
+
+
+                            try
+                            {
+                                int count = Convert.ToInt32(strCount);
+
+                                //We validate that it's lower. No that it has a specific number
+                                if (LastProcessedCounter.HasValue && LastProcessedCounter.Value < count)
+                                {
+                                    DoLog(string.Format("<{0}>- Recevied an orderId counter {1} which is bigger than the number we had in memory. The count seems ok",
+                                        Configuration.Name, count, LastProcessedCounter.HasValue ? LastProcessedCounter.Value.ToString() : "-"), Constants.MessageType.AssertOk);
+                                    LastProcessedCounter = count;
+                                }
+                                else
+                                {
+                                    if (LastProcessedCounter.HasValue)
+                                    {
+                                        DoLog(string.Format("<{0}>- Recevied an orderId counter {1} which is LOWER than the number we had in memory. What happened with the counter?",
+                                             Configuration.Name, count, LastProcessedCounter.HasValue ? LastProcessedCounter.Value.ToString() : "-"), Constants.MessageType.AssertFailed);
+
+                                        OrdersSent.Remove(key);
+                                    }
+                                    else
+                                        LastProcessedCounter = count;
+                                }
+
+                            }
+                            catch (Exception ex)
+                            {
+                                DoLog(string.Format("<{0}>- Received an order Id with a counter that doesn't seem to be an int value: {1}", Configuration.Name, strCount), Constants.MessageType.AssertFailed);
+                                OrdersSent.Remove(key);
+                            }
+                        }
+                        else
+                        {
+                            DoLog(string.Format("<{0}>- Received an order Id whose format doesn't match the exepected one: {1}", Configuration.Name, orderId), Constants.MessageType.AssertFailed);
+                            OrdersSent.Remove(key);
+                        }
+                    }
+                    //This must be an order we don't manage or that we have already rejected so the counter is considered to be not working
                 }
 
             }
             catch (Exception ex)
             {
-                DoLog(string.Format("{0}-Critical error processing a execution report:{1}", Configuration.Name, ex.Message), Constants.MessageType.Error);
+                DoLog(string.Format("<{0}>-Critical error processing a execution report:{1}", Configuration.Name, ex.Message), Constants.MessageType.AssertFailed);
             }
-
-
         }
 
         //Here we will process the rejected messages and see if that's ok or not
