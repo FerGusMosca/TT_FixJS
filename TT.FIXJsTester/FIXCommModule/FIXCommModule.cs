@@ -153,7 +153,7 @@ namespace FIXCommModule
                     
                     }
                     else
-                        DoLog(string.Format("{0}-Ignoring unknown ClOrdId execution report @{1} ", Configuration.Name, clOrdId), Fwk.Main.Common.Util.Constants.MessageType.Error);
+                        DoLog(string.Format("{0}-Ignoring unknown ClOrdId execution report @{1} ", Configuration.Name, clOrdId), Fwk.Main.Common.Util.Constants.MessageType.Information);
 
                 }
             }
@@ -326,7 +326,10 @@ namespace FIXCommModule
         public void ToAdmin(QuickFix.Message message, SessionID sessionID)
         {
             DoLog(string.Format("@toAdmin:{0}", sessionID.ToString()), Fwk.Main.Common.Util.Constants.MessageType.Information);
-
+            if (message is Logon)
+            {
+                message.Header.SetField(new ResetSeqNumFlag(ResetSeqNumFlag.NO));
+            }
           
         }
 

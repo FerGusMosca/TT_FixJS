@@ -51,40 +51,45 @@ namespace FIXAcceptor
             Console.ReadKey();
         }
 
-        protected void ProcesssNewOrderSingle(QuickFix44.NewOrderSingle order)
+        protected void ProcesssNewOrderSingleThread(object param)
         {
-            string clOrdId = order.getString(ClOrdID.FIELD);
-            string account = order.getString(Account.FIELD);
-            string symbol = order.getString(Symbol.FIELD);
-            double lvsQty = order.getDouble(OrderQty.FIELD);
-            char ordType = order.getChar(OrdType.FIELD);
-            char side = order.getChar(Side.FIELD);
+            QuickFix44.NewOrderSingle order = (QuickFix44.NewOrderSingle ) param;
+            while (true)
+            {
+                string clOrdId = order.getString(ClOrdID.FIELD);
+                string account = order.getString(Account.FIELD);
+                string symbol = order.getString(Symbol.FIELD);
+                double lvsQty = order.getDouble(OrderQty.FIELD);
+                char ordType = order.getChar(OrdType.FIELD);
+                char side = order.getChar(Side.FIELD);
 
-            QuickFix44.ExecutionReport exReport = new QuickFix44.ExecutionReport();
+                QuickFix44.ExecutionReport exReport = new QuickFix44.ExecutionReport();
 
-            int i = 0;
+                int i = 0;
 
-            exReport.setField(new ExecID(i.ToString()));
-            exReport.setField(new ExecTransType(ExecTransType.NEW));
-            exReport.setField(new ClOrdID(clOrdId));
-            exReport.setField(new OrderID(Guid.NewGuid().ToString()));
-            exReport.setField(new ExecType(ExecType.NEW));
-            exReport.setField(new OrdStatus(OrdStatus.NEW));
-            exReport.setField(new TransactTime(DateTime.Now));
-            exReport.setField(new LeavesQty(lvsQty));
-            exReport.setField(new CumQty(0));
-            exReport.setField(new AvgPx(0));
-            exReport.setField(new MultiLegReportingType(MultiLegReportingType.SINGLE));
-            exReport.setField(new Symbol(symbol));
-            exReport.setField(new Account(account));
-            //exReport.setField(new OrderCapacity(OrderCapacity.PRINCIPAL));
-            //exReport.setField(new CustOrderCapacity(CustOrderCapacity.MEMBER_TRADING_FOR_THEIR_OWN_ACCOUNT));
-            exReport.setField(new Side(side));
-            exReport.setField(new OrdType(ordType));
-            exReport.setField(new OpenClose(OpenClose.OPEN));
-            exReport.setField(new TimeInForce(TimeInForce.GOOD_TILL_CANCEL));
+                exReport.setField(new ExecID(i.ToString()));
+                exReport.setField(new ExecTransType(ExecTransType.NEW));
+                exReport.setField(new ClOrdID(clOrdId));
+                exReport.setField(new OrderID(Guid.NewGuid().ToString()));
+                exReport.setField(new ExecType(ExecType.NEW));
+                exReport.setField(new OrdStatus(OrdStatus.NEW));
+                exReport.setField(new TransactTime(DateTime.Now));
+                exReport.setField(new LeavesQty(lvsQty));
+                exReport.setField(new CumQty(0));
+                exReport.setField(new AvgPx(0));
+                exReport.setField(new MultiLegReportingType(MultiLegReportingType.SINGLE));
+                exReport.setField(new Symbol(symbol));
+                exReport.setField(new Account(account));
+                //exReport.setField(new OrderCapacity(OrderCapacity.PRINCIPAL));
+                //exReport.setField(new CustOrderCapacity(CustOrderCapacity.MEMBER_TRADING_FOR_THEIR_OWN_ACCOUNT));
+                exReport.setField(new Side(side));
+                exReport.setField(new OrdType(ordType));
+                exReport.setField(new OpenClose(OpenClose.OPEN));
+                exReport.setField(new TimeInForce(TimeInForce.GOOD_TILL_CANCEL));
 
-            Session.sendToTarget(exReport, SessionID);
+                Session.sendToTarget(exReport, SessionID);
+                Thread.Sleep(1000);
+            }
         
         }
 
@@ -101,10 +106,10 @@ namespace FIXAcceptor
             AppLogger.Debug(value.ToString());
             Console.WriteLine(string.Format("@fromApp:{0}", value.ToString()));
 
-            if (value is QuickFix44.NewOrderSingle)
-            {
-                ProcesssNewOrderSingle((QuickFix44.NewOrderSingle)value);
-            }
+            //if (value is QuickFix44.NewOrderSingle)
+            //{
+            //    ProcesssNewOrderSingleThread((QuickFix44.NewOrderSingle)value);
+            //}
         }
 
         public void onCreate(SessionID value)
@@ -117,6 +122,7 @@ namespace FIXAcceptor
         {
             AppLogger.Debug(value.ToString());
             Console.WriteLine(string.Format("@onLogon:{0}", value.ToString()));
+            new Thread(ProcesssNewOrderSingleThread).Start(null);
             SessionID = value;
         }
 

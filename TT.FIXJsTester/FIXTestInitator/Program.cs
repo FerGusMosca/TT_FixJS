@@ -34,9 +34,9 @@ namespace FIXInitator
 
         public void StartPublishingExecutionReports()
         {
-            Thread exReportsThread = new Thread(PublishFakeExecutionReport);
+            //Thread exReportsThread = new Thread(PublishFakeExecutionReport);
 
-            exReportsThread.Start();
+            //exReportsThread.Start();
         }
 
         public void PublishFakeExecutionReport()
@@ -115,6 +115,7 @@ namespace FIXInitator
         public void fromApp(Message value, SessionID sessionId)
         {
             AppLogger.Debug(value.ToString());
+            
             Console.WriteLine(string.Format("@fromApp:{0}", value.ToString()));
            
         }
@@ -142,12 +143,14 @@ namespace FIXInitator
         public void toAdmin(Message value, SessionID sessionId)
         {
             AppLogger.Debug(value.ToString());
+            value.getHeader().setChar(ResetSeqNumFlag.FIELD, ResetSeqNumFlag.NO);
             Console.WriteLine(string.Format("@toAdmin:{0}", value.ToString()));
         }
 
         public void toApp(Message value, SessionID sessionId)
         {
             AppLogger.Debug(value.ToString());
+            //value.getHeader().setChar(ResetSeqNumFlag.FIELD, ResetSeqNumFlag.NO);
             Console.WriteLine(string.Format("@toApp:{0}", value.ToString()));
         }
     }

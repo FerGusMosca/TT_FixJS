@@ -13,6 +13,10 @@ namespace FIXRecoveryTesterModule.Common.Configuration
         #region Public Methods
 
 
+        public int TimeoutInSeconds { get; set; }
+
+        public int ResponsesToArrive { get; set; }
+
         #endregion
 
         #region Public Methods

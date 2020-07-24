@@ -150,6 +150,7 @@ namespace FIXInitiator2
         public void ToAdmin(QuickFix.Message message, SessionID sessionID)
         {
             AppLogger.Debug(message.ToString());
+            message.Header.SetField(new QuickFix.Fields.ResetSeqNumFlag(QuickFix.Fields.ResetSeqNumFlag.NO));
             Console.WriteLine(string.Format("@toAdmin:{0}", message.ToString()));
         }
 
