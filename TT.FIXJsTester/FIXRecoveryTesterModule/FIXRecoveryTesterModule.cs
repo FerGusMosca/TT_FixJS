@@ -124,14 +124,17 @@ namespace FIXRecoveryTesterModule
             {
                 while (true)
                 {
-                    //1- Ok order
-                    DoLog(string.Format("Sending full regular order @{0}", Configuration.Name), Constants.MessageType.Information);
-                    Order fullOrder = OrderBuilder.BuildFullOrder();
-                    NewOrderWrapper fullOrderWrapper = new NewOrderWrapper(fullOrder, Configuration);
-                    MessageOk.Add(fullOrder.ClOrdId, fullOrder);
-                    TimeoutOrders.Add(fullOrder.ClOrdId, DateTime.Now);
-                    ExecutionReportsReceived.Add(fullOrder.ClOrdId, 0);
-                    DoPublishMessage(fullOrderWrapper);
+                    lock (TimeoutOrders)
+                    {
+                        //1- Ok order
+                        DoLog(string.Format("Sending full regular order @{0}", Configuration.Name), Constants.MessageType.Information);
+                        Order fullOrder = OrderBuilder.BuildFullOrder();
+                        NewOrderWrapper fullOrderWrapper = new NewOrderWrapper(fullOrder, Configuration);
+                        MessageOk.Add(fullOrder.ClOrdId, fullOrder);
+                        TimeoutOrders.Add(fullOrder.ClOrdId, DateTime.Now);
+                        ExecutionReportsReceived.Add(fullOrder.ClOrdId, 0);
+                        DoPublishMessage(fullOrderWrapper);
+                    }
                     Thread.Sleep(2000);
                 }
 

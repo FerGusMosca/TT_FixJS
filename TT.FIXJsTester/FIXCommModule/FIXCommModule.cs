@@ -70,8 +70,8 @@ namespace FIXCommModule
                         {
                             ICommunicationModule module = (ICommunicationModule)Activator.CreateInstance(moduleType);
                             module.Initialize(ProcessMessage, DoLog, testingModule.Config);
-
-                            TestingModules.Add(testingModule.Name, module);
+                            if(!TestingModules.ContainsKey(testingModule.Name))
+                                TestingModules.Add(testingModule.Name, module);
                         }
                         else
                             throw new Exception("assembly not found: " + testingModule.Assembly);
@@ -287,7 +287,7 @@ namespace FIXCommModule
 
         public void FromAdmin(QuickFix.Message message, SessionID sessionID)
         {
-            DoLog(string.Format("@fromAdmin:{0}", message.ToString()), Fwk.Main.Common.Util.Constants.MessageType.Information);
+            DoLog(string.Format("@fromAdmin<{0}>:{1}",sessionID.ToString() ,message.ToString()), Fwk.Main.Common.Util.Constants.MessageType.Information);
             if (message is Reject)
             {
                 Reject reject = (Reject)message;
@@ -298,7 +298,7 @@ namespace FIXCommModule
 
         public void FromApp(QuickFix.Message message, SessionID sessionID)
         {
-            DoLog(string.Format("@fromApp:{0}", message.ToString()), Fwk.Main.Common.Util.Constants.MessageType.Information);
+            DoLog(string.Format("@fromApp<{0}>:{1}", sessionID.ToString(), message.ToString()), Fwk.Main.Common.Util.Constants.MessageType.Information);
             if (message is QuickFix.FIX44.ExecutionReport)
             {
                 Thread processExecReport = new Thread(ProcesssExecutionReportMessage);
@@ -325,7 +325,7 @@ namespace FIXCommModule
 
         public void ToAdmin(QuickFix.Message message, SessionID sessionID)
         {
-            DoLog(string.Format("@toAdmin:{0}", sessionID.ToString()), Fwk.Main.Common.Util.Constants.MessageType.Information);
+            DoLog(string.Format("@toAdmin <{0}>:{1}", sessionID.ToString(),message.ToString()), Fwk.Main.Common.Util.Constants.MessageType.Information);
             if (message is Logon)
             {
                 message.Header.SetField(new ResetSeqNumFlag(ResetSeqNumFlag.NO));
@@ -335,7 +335,7 @@ namespace FIXCommModule
 
         public void ToApp(QuickFix.Message message, SessionID sessionId)
         {
-            DoLog(string.Format("@toApp:{0}", sessionId.ToString()), Fwk.Main.Common.Util.Constants.MessageType.Information);
+            DoLog(string.Format("@toApp <{0}>:{1}", sessionId.ToString(), message.ToString()), Fwk.Main.Common.Util.Constants.MessageType.Information);
 
         }
 
