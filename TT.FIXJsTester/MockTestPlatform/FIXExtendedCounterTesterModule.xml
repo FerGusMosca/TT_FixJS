@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Name>FIXExtendedCounterTesterModule</Name>
+
+  <PauseBetweenOrdersInSeconds>1</PauseBetweenOrdersInSeconds>
+
+  <TimeoutInSeconds>60</TimeoutInSeconds>
+  <!--Timeout for the 5<ExecutionReportsPerOrder> ERs -->
+
+  <ExecutionReportsPerOrder>5</ExecutionReportsPerOrder>
+
+</Configuration>

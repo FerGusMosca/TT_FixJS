@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{44C06524-ACB6-4540-812D-D2B82AF2A81F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FIXExtendedCounterTesterModule</RootNamespace>
+    <AssemblyName>FIXExtendedCounterTesterModule</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FIXExtendedCounterTesterModule.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BaseTestingModule.Common\BaseTestingModule.Common.csproj">
+      <Project>{a163f439-bc6c-4a88-b68e-4a74f80c80df}</Project>
+      <Name>BaseTestingModule.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BaseTestingModule.LogicLayer\BaseTestingModule.LogicLayer.csproj">
+      <Project>{914bb8ed-219a-4904-b298-612d098e4447}</Project>
+      <Name>BaseTestingModule.LogicLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BaseTestingModule\BaseTestingModule.csproj">
+      <Project>{9cec2aa3-492e-4a09-a043-d72bbc6d2bfc}</Project>
+      <Name>BaseTestingModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FIXExtendedCounterTesterModule.Common\FIXExtendedCounterTesterModule.Common.csproj">
+      <Project>{551b9a54-04e2-4968-addc-e87f2657ff6c}</Project>
+      <Name>FIXExtendedCounterTesterModule.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fwk.Main.LogicLayer\Fwk.Main.LogicLayer.csproj">
+      <Project>{075cc3db-2f95-410a-a817-e182e4edef54}</Project>
+      <Name>Fwk.Main.LogicLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\source\Framework\Fwk.Main.BusinessEntities\Fwk.Main.BusinessEntities.csproj">
+      <Project>{97f7f85d-864c-44ed-8901-547f2f693427}</Project>
+      <Name>Fwk.Main.BusinessEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\source\Framework\Fwk.Main.Common\Fwk.Main.Common.csproj">
+      <Project>{4a57ed3b-774d-4344-b091-3328838f57f5}</Project>
+      <Name>Fwk.Main.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

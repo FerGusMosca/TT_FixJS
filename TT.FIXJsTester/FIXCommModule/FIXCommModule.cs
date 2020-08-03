@@ -49,6 +49,9 @@ namespace FIXCommModule
 
         protected Dictionary<int, string> SendersDict { get; set; }
 
+
+        protected bool TestingModulesInitialized { get; set; }
+
         protected object tLock = new object();
 
         #endregion
@@ -241,6 +244,7 @@ namespace FIXCommModule
                     FIXMessageCreator = new FIXMessageCreator();
 
                     string path = Configuration.InitiatorCfg;
+                    TestingModulesInitialized = false;
 
                     SessionSettings = new SessionSettings(path);
                     FileStoreFactory = new FileStoreFactory(SessionSettings);
@@ -314,7 +318,11 @@ namespace FIXCommModule
         public void OnLogon(SessionID sessionID)
         {
             SessionID = sessionID;
-            InstantiateTestingModules();//Now we can start the tests
+            if (!TestingModulesInitialized)
+            {
+                InstantiateTestingModules();//Now we can start the tests
+                TestingModulesInitialized = true;
+            }
             DoLog(string.Format("@onLogon:{0}", sessionID.ToString()), Fwk.Main.Common.Util.Constants.MessageType.Information);
         }
 

@@ -17,7 +17,16 @@
       <Name>FIXCounterTesterModule</Name>
       <Assembly>FIXCounterTesterModule.FIXCounterTesterModule,FIXCounterTesterModule</Assembly>
       <Config>FIXCounterTesterModule.xml</Config>
-    </Module>-->
+    </Module>
+    
+    
+      <Module>
+      <Name>FIXExtendedCounterTesterModule</Name>
+      <Assembly>FIXExtendedCounterTesterModule.FIXExtendedCounterTesterModule,FIXExtendedCounterTesterModule</Assembly>
+      <Config>FIXExtendedCounterTesterModule.xml</Config>
+    </Module>
+    
+    -->
 
 
     <Module>

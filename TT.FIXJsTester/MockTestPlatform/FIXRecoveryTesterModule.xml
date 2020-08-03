@@ -5,6 +5,6 @@
 
   <ResponsesToArrive>5</ResponsesToArrive>
   
-  <TimeoutInSeconds>30</TimeoutInSeconds>
+  <TimeoutInSeconds>120</TimeoutInSeconds>
 
 </Configuration>
