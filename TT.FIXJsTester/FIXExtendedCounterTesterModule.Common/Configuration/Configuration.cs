@@ -19,6 +19,7 @@ namespace FIXExtendedCounterTesterModule.Common.Configuration
 
         public int TimeoutInSeconds { get; set; }
 
+
         #endregion
 
         #region Public Methods

@@ -11,6 +11,8 @@ namespace FIXGenericTesterModule.Common.Configuration
     public class Configuration : BaseConfiguration, IConfiguration
     {
         #region Public Methods
+
+        public int TimeoutInSeconds { get; set; }
        
 
         #endregion

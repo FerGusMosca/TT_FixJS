@@ -66,7 +66,7 @@ namespace FIXRecoveryTesterModule
                         else if (ExecutionReportsReceived[key] > Configuration.ResponsesToArrive)
                             DoLog(string.Format("<{0}>- Received {1} ERs for ClOrdId {2}. This is more than expected (max {3})!!!!",
                                                 Configuration.Name, ExecutionReportsReceived[key], clOrderId, Configuration.ResponsesToArrive),
-                                                Constants.MessageType.AssertOk);
+                                                Constants.MessageType.AssertFailed);
                     }
                     //This must be an order we don't manage or that we have already rejected so the counter is considered to be not working
                 }

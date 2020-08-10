@@ -225,7 +225,7 @@ namespace FIXCounterTesterModule
                     runTestsThread.Start();
 
                     Thread processTimeouts = new Thread(ProcessTimeouts);
-                    processTimeouts.Start(Configuration.Name);
+                    processTimeouts.Start(new object[] { Configuration.Name, Configuration.TimeoutInSeconds });
 
                     return true;
                 }

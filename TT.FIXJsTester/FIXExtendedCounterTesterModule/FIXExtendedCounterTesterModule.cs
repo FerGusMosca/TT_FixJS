@@ -66,7 +66,7 @@ namespace FIXExtendedCounterTesterModule
                             //We validate that it's lower. No that it has a specific number
                             if (counter == Configuration.ExecutionReportsPerOrder && counter == (lastCounter + 1))
                             {
-                                DoLog(string.Format("<{0}>- Recevied counter #{1} for cl. order id {2} which is the last counter and all the previous counter were received ok!. The count is ok!",
+                                DoLog(string.Format("<{0}>- Received counter #{1} for cl. order id {2} which is the last counter and all the previous counter were received ok!. The count is ok!",
                                                      Configuration.Name, counter, clOrderId), Constants.MessageType.AssertOk);
                                 ClearOrderTracking(clOrderId);
                             }

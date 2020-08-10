@@ -23,7 +23,10 @@ namespace BaseTestingModule
 
         protected void ProcessTimeouts(object param)
         {
-            string moduleName = (string)param;
+
+            object[] parameters = (object[])param;
+            string moduleName = (string)parameters[0];
+            int timeoutInSeconds = (int)parameters[1];
             try
             {
                 while (true)
@@ -37,9 +40,9 @@ namespace BaseTestingModule
 
                             TimeSpan elapsed = DateTime.Now - start;
 
-                            if (elapsed.TotalSeconds > 3)
+                            if (elapsed.TotalSeconds > timeoutInSeconds)
                             {
-                                DoLog(string.Format("{0}-TIMEOUT waiting for response for for Order ClOrdId = {1}. ", moduleName, key), Constants.MessageType.AssertFailed);
+                                DoLog(string.Format("<{0}>-TIMEOUT waiting for response for for Order ClOrdId = {1}. ", moduleName, key), Constants.MessageType.AssertFailed);
                                 toRemove.Add(key);
                             }
 
